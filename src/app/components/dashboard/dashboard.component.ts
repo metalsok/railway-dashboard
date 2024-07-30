@@ -7,18 +7,7 @@ import {
 } from '@angular/core';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import { MatInput } from '@angular/material/input';
-import { MatIcon } from '@angular/material/icon';
-import { MatButton, MatIconButton } from '@angular/material/button';
-import {
-  MatCard,
-  MatCardActions,
-  MatCardContent,
-  MatCardHeader,
-  MatCardImage,
-  MatCardSubtitle,
-  MatCardTitle,
-} from '@angular/material/card';
-import { AsyncPipe, JsonPipe, NgOptimizedImage } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import {
   debounceTime,
   distinctUntilChanged,
@@ -38,34 +27,21 @@ import {
   updateStationQuery,
 } from '../../store/actions/station.actions';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
-import { Router, RouterLink } from '@angular/router';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { MatDivider } from '@angular/material/divider';
 import { HttpErrorResponse } from '@angular/common/http';
+import { StationCardComponent } from '../station-card/station-card.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
   imports: [
     MatFormField,
-    MatInput,
-    MatIcon,
-    MatIconButton,
-    MatLabel,
-    MatCard,
-    MatCardHeader,
-    MatCardContent,
-    MatCardImage,
-    MatCardActions,
-    AsyncPipe,
-    MatCardTitle,
-    MatCardSubtitle,
-    NgOptimizedImage,
-    MatButton,
-    ReactiveFormsModule,
     MatProgressSpinner,
-    RouterLink,
-    MatDivider,
+    AsyncPipe,
+    MatInput,
+    ReactiveFormsModule,
+    StationCardComponent,
+    MatLabel,
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.scss',
@@ -74,7 +50,6 @@ import { HttpErrorResponse } from '@angular/common/http';
 export class DashboardComponent implements OnInit {
   private store = inject(Store);
   private destroyRef = inject(DestroyRef);
-  private router = inject(Router);
 
   searchControl = new FormControl('');
   loading$: Observable<boolean> = this.store.select(selectLoading);
@@ -96,9 +71,4 @@ export class DashboardComponent implements OnInit {
         this.store.dispatch(updateStationQuery({ value: query || '' })),
       );
   }
-
-  navigateToDetails(detailId: string) {
-    this.router.navigate(['/dashboard', detailId]);
-  }
-
 }

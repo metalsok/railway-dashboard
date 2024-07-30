@@ -2,11 +2,6 @@
 <mat-form-field class="w-full sm:w-1/3 mt-4">
     <mat-label>Location filter</mat-label>
     <input matInput type="text" [formControl]="searchControl" aria-label="Location filter">
-    @if (searchControl.value) {
-        <button matSuffix mat-icon-button aria-label="Clear" (click)="searchControl.setValue('')">
-            <mat-icon>close</mat-icon>
-        </button>
-    }
 </mat-form-field>
 @if (loading$|async) {
     <div class="flex justify-center items-center">
@@ -25,37 +20,7 @@
     }
     <div class="grid grid-flow-row gap-6 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center mt-8">
         @for (station of filteredStations$ | async; track $index) {
-            <div aria-live="polite">
-                <mat-card class="w-96 cursor-pointer flex flex-col gap-6"
-                          [tabIndex]="$index" appearance="raised"
-                          [routerLink]="station.detailId"
-                          (keydown.enter)="navigateToDetails(station.detailId)"
-                          role="button"
-                          [attr.aria-label]="'View details for' + station.location + 'station'">
-                    <mat-card-header>
-                        <div mat-card-avatar class="mr-3">
-                            <img width="50" height="50" src="/images/icons/map-marker.png"
-                                 alt="Map marker icon for {{station.location}}">
-                        </div>
-                        <mat-card-title>
-                            <span class="text-lg" aria-label="Station location">{{ station.location }}</span>
-                        </mat-card-title>
-                        <mat-card-subtitle>
-                            <span class="text-gray-400" aria-label="Station name">{{ station.name }}</span>
-                        </mat-card-subtitle>
-                    </mat-card-header>
-                    <div class="overflow-hidden">
-                        <img mat-card-image [src]="station.imgPath" alt="Photo of {{station.location}} railway station"
-                             class="object-cover w-full h-72 transition-transform duration-300 ease-in-out transform hover:scale-105">
-                    </div>
-                    <mat-card-content>{{ station.text }}</mat-card-content>
-                    <mat-card-actions align="end">
-                        <button class="hover:text-gray-400" [routerLink]="station.detailId" role="button"
-                                [attr.aria-label]="'View details for' + station.location + 'station'">Details
-                        </button>
-                    </mat-card-actions>
-                </mat-card>
-            </div>
+            <app-station-card [tabIndex]="$index" [station]="station"></app-station-card>
         }
     </div>
     @if ((filteredStations$|async)?.length === 0 && !(error$|async)) {

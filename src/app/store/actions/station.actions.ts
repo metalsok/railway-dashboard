@@ -13,18 +13,18 @@ export const loadStationsFailure = createAction(
   props<{ error: HttpErrorResponse }>(),
 );
 export const updateStationQuery = createAction(
-  '[Station] Update Stations Query',
+  '[Station] Update Query',
   props<{ value: string }>(),
 );
 export const loadStationDetails = createAction(
-  '[Station] Load Station Details',
+  '[Station] Load Details',
   props<{ id: string }>(),
 );
 export const loadStationDetailsSuccess = createAction(
-  '[Station] Load Station Details Success',
+  '[Station] Load Details Success',
   props<{ details: StationDetails }>(),
 );
 export const loadStationDetailsFailure = createAction(
-  '[Station] Load Station Details Failure',
+  '[Station] Load Details Failure',
   props<{ error: HttpErrorResponse }>(),
 );

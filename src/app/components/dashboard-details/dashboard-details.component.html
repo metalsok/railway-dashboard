@@ -1,7 +1,6 @@
 @if (station$|async; as station) {
     <div class="flex flex-col gap-6">
         <img [src]="station.headerImgPath" alt="Photo of {{station.title}} railway station">
-
         <h1 class="text-3xl font-bold">{{ station.title }}</h1>
         <p>{{ station.firstParagraph }}</p>
         <p>{{ station.secondParagraph }}</p>

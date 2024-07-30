@@ -1,0 +1,31 @@
+<div aria-live="polite">
+    <mat-card class="w-96 cursor-pointer flex flex-col gap-6"
+              appearance="raised"
+              [routerLink]="station.detailId"
+              (keydown.enter)="navigateToDetails(station.detailId)"
+              role="button"
+              [attr.aria-label]="'View details for' + station.location + 'station'">
+        <mat-card-header>
+            <div mat-card-avatar class="mr-3">
+                <img width="50" height="50" src="/images/icons/map-marker.png"
+                     alt="Map marker icon for {{station.location}}">
+            </div>
+            <mat-card-title>
+                <span class="text-lg" aria-label="Station location">{{ station.location }}</span>
+            </mat-card-title>
+            <mat-card-subtitle>
+                <span class="text-gray-400" aria-label="Station name">{{ station.name }}</span>
+            </mat-card-subtitle>
+        </mat-card-header>
+        <div class="overflow-hidden">
+            <img mat-card-image [src]="station.imgPath" alt="Photo of {{station.location}} railway station"
+                 class="object-cover w-full h-72 transition-transform duration-300 ease-in-out transform hover:scale-105">
+        </div>
+        <mat-card-content>{{ station.text }}</mat-card-content>
+        <mat-card-actions align="end">
+            <button class="hover:text-gray-400" [routerLink]="station.detailId" role="button"
+                    [attr.aria-label]="'View details for' + station.location + 'station'">Details
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>
