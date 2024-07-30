@@ -30,6 +30,7 @@ import { MatProgressSpinner } from '@angular/material/progress-spinner';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HttpErrorResponse } from '@angular/common/http';
 import { StationCardComponent } from '../station-card/station-card.component';
+import { DEBOUNCE_TIME } from '../../constants/debounce-time.const';
 
 @Component({
   selector: 'app-root',
@@ -59,16 +60,26 @@ export class DashboardComponent implements OnInit {
   error$: Observable<HttpErrorResponse> = this.store.select(selectError);
 
   ngOnInit(): void {
+    this.loadStations();
+    this.setupSearchControl();
+  }
+
+  private loadStations(): void {
     this.store.dispatch(loadStations());
+  }
+
+  private setupSearchControl(): void {
     this.searchControl.valueChanges
       .pipe(
         startWith(''),
         distinctUntilChanged(),
-        debounceTime(300),
+        debounceTime(DEBOUNCE_TIME),
         takeUntilDestroyed(this.destroyRef),
       )
-      .subscribe((query) =>
-        this.store.dispatch(updateStationQuery({ value: query || '' })),
-      );
+      .subscribe((query) => this.updateQuery(query));
+  }
+
+  updateQuery(query: string | null): void {
+    this.store.dispatch(updateStationQuery({ value: query || '' }));
   }
 }

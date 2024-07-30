@@ -7,7 +7,7 @@ import {
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
-import { AsyncPipe, JsonPipe } from '@angular/common';
+import { AsyncPipe } from '@angular/common';
 import { selectStationDetails } from '../../store/state/station-details.state';
 import { loadStationDetails } from '../../store/actions/station.actions';
 import { Observable } from 'rxjs';

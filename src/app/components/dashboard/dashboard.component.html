@@ -7,14 +7,14 @@
     <div class="flex justify-center items-center">
         <mat-progress-spinner
                 class="w-6"
-                [mode]="'indeterminate'"
+                mode="indeterminate"
                 [value]="50"
                 aria-label="Loading">
         </mat-progress-spinner>
     </div>
 } @else {
     @if (error$ | async; as error) {
-        <div>
+        <div aria-label="Error">
             {{ (error.message) || 'An error occurred while loading data.' }}
         </div>
     }
