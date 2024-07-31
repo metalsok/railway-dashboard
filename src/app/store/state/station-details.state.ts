@@ -24,7 +24,6 @@ export const stationDetailsFeatureState = createFeature({
     initialStationDetailsState,
     on(loadStationDetails, (state) => ({ ...state, loading: true })),
     on(loadStationDetailsSuccess, (state, { details }) => {
-      console.log(state);
       return {
         ...state,
         loading: false,
@@ -42,6 +41,6 @@ export const stationDetailsFeatureState = createFeature({
 export const {
   selectStationDetailsState,
   selectDetails: selectStationDetails,
-  selectLoading: selectLoadingDetails,
+  selectLoading: selectDetailsLoading,
   selectError: selectDetailsError,
 } = stationDetailsFeatureState;

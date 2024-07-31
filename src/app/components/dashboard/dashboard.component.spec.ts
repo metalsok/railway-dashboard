@@ -20,7 +20,7 @@ import {
   BrowserAnimationsModule,
   NoopAnimationsModule,
 } from '@angular/platform-browser/animations';
-import {DEBOUNCE_TIME} from "../../constants/debounce-time.const";
+import { DEBOUNCE_TIME } from '../../constants/debounce-time.const';
 
 describe('DashboardComponent', () => {
   let component: DashboardComponent;
@@ -57,19 +57,19 @@ describe('DashboardComponent', () => {
     fixture.detectChanges();
   });
   it('should dispatch loadStations action on init', () => {
-    const dispatchSpy = spyOn(store, 'dispatch');
+    const dispatchSpy = spyOn(store, 'dispatch' as any);
     component.ngOnInit();
-    expect(dispatchSpy).toHaveBeenCalledWith(loadStations());
+    expect(dispatchSpy).toHaveBeenCalledWith(loadStations() as any);
   });
 
   it('should update store when searchControl value changes', fakeAsync(() => {
     component.ngOnInit();
-    const dispatchSpy = spyOn(store, 'dispatch');
+    const dispatchSpy = spyOn(store, 'dispatch' as any);
     fixture.detectChanges();
     component.searchControl.setValue('test');
     tick(DEBOUNCE_TIME);
     expect(dispatchSpy).toHaveBeenCalledWith(
-      updateStationQuery({ value: 'test' }),
+      updateStationQuery({ value: 'test' }) as any,
     );
   }));
 });

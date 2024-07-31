@@ -1,8 +1,8 @@
-<div aria-live="polite">
     <mat-card class="w-96 cursor-pointer flex flex-col gap-6"
+              aria-live="polite"
+              (keydown.enter)="navigateToDetails(station.detailId)"
               appearance="raised"
               [routerLink]="station.detailId"
-              (keydown.enter)="navigateToDetails(station.detailId)"
               role="button"
               [attr.aria-label]="'View details for' + station.location + 'station'">
         <mat-card-header>
@@ -28,4 +28,3 @@
             </button>
         </mat-card-actions>
     </mat-card>
-</div>

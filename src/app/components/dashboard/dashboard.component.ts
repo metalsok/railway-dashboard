@@ -31,6 +31,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HttpErrorResponse } from '@angular/common/http';
 import { StationCardComponent } from '../station-card/station-card.component';
 import { DEBOUNCE_TIME } from '../../constants/debounce-time.const';
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -51,6 +52,8 @@ import { DEBOUNCE_TIME } from '../../constants/debounce-time.const';
 export class DashboardComponent implements OnInit {
   private store = inject(Store);
   private destroyRef = inject(DestroyRef);
+  private router = inject(Router);
+
 
   searchControl = new FormControl('');
   loading$: Observable<boolean> = this.store.select(selectLoading);
@@ -81,5 +84,9 @@ export class DashboardComponent implements OnInit {
 
   updateQuery(query: string | null): void {
     this.store.dispatch(updateStationQuery({ value: query || '' }));
+  }
+
+  navigateToDetails(detailId: string) {
+    this.router.navigate(['/dashboard', detailId]);
   }
 }
