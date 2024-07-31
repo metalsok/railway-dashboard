@@ -31,7 +31,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { HttpErrorResponse } from '@angular/common/http';
 import { StationCardComponent } from '../station-card/station-card.component';
 import { DEBOUNCE_TIME } from '../../constants/debounce-time.const';
-import {Router} from "@angular/router";
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -53,7 +53,6 @@ export class DashboardComponent implements OnInit {
   private store = inject(Store);
   private destroyRef = inject(DestroyRef);
   private router = inject(Router);
-
 
   searchControl = new FormControl('');
   loading$: Observable<boolean> = this.store.select(selectLoading);
